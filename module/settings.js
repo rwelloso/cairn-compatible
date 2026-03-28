@@ -19,6 +19,16 @@ export const registerSettings = () => {
     requiresReload: true,
   });
 
+  game.settings.register("cairn", "show-gold-not-cost", {
+    name: game.i18n.localize("CAIRN.Settings.ShowGoldNotCost.label"),
+    hint: game.i18n.localize("CAIRN.Settings.ShowGoldNotCost.hint"),
+    scope: "world",
+    config: true,
+    type: Boolean,
+    default: false,
+    requiresReload: true,
+  });
+
   game.settings.register("cairn", "use-panic", {
     name: game.i18n.localize("CAIRN.Settings.UsePanic.label"),
     hint: game.i18n.localize("CAIRN.Settings.UsePanic.hint"),

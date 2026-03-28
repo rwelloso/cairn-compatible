@@ -52,7 +52,7 @@
     "ConfirmDelete": "Delete"
   },
   "CAIRN.Owner": "Owner",
-  "CAIRN.OverburdenByGold": "Character may be overburdened by a gold",
+  "CAIRN.OverburdenByGold": "Character may be overburdened by gold",
   "CAIRN.Quantity": "Quantity",
   "CAIRN.Panicked": "Panicked",
   "CAIRN.RemoveFatigue": "Remove fatigue",
@@ -75,6 +75,11 @@
       "label": "Use gold threshold",
       "hint": "Define number of gold pieces which occupies full inventory slot. Zero means that gold pieces are always petty.",
       "message": "Gold is counted as an inventory"
+    },
+    "ShowGoldNotCost": {
+      "label": "Show gold instead of cost on containers",
+      "hint": "This allows putting gold (including weight tracking) inside containers.",
+      "message": "Gold weight is rounded up instead of down when tracked in containers."
     },
     "UsePanic": {
       "label": "Use panic condition",

@@ -16,14 +16,27 @@
                            value="{{data.system.slots.value}}" data-dtype="Number" />
                 </div>
             </div>
-             <!-- Cost -->
-            <div class="resource-counter slots-counter">
-                <label class="large-resource-label" for="system.cost.value">{{ localize 'CAIRN.Cost' }}</label>
-                <div class="resource-input-wrapper">
-                    <input type="text" name="system.cost.value" id="system.cost.value"
-                        value="{{data.system.cost.value}}" data-dtype="Number" />
+             <!-- Cost/Gold -->
+            {{#if data.system.showGoldNotCost }}
+                <div class="resource-counter slots-counter {{#if data.system.maybeTooMuchGold }}overburdened-gold{{/if}}"
+                {{#if data.system.maybeTooMuchGold }} title="{{localize 'CAIRN.OverburdenByGold'}}" {{/if}} >
+                    <label for="system.gold" >
+                        {{ localize 'CAIRN.Gold' }}
+                    </label>
+                    <div class="resource-input-wrapper">
+                        <input type="number" name="system.gold" id="system.gold" value="{{data.system.gold}}" data-dtype="Number" />
+                    </div>
                 </div>
-            </div>
+            {{else}}
+                <div class="resource-counter slots-counter">
+                    <label class="large-resource-label" for="system.cost.value">{{ localize 'CAIRN.Cost' }}</label>
+                    <div class="resource-input-wrapper">
+                        <input type="text" name="system.cost.value" id="system.cost.value"
+                            value="{{data.system.cost.value}}" data-dtype="Number" />
+                    </div>
+                </div>
+            {{/if}}
+
         </div>
         <div class="character-sheet-section-tabs">
             <nav class="tabs" data-group="primary">
