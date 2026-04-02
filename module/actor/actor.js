@@ -60,7 +60,7 @@ export class CairnActor extends Actor {
     const gct = game.settings.get("cairn", "use-gold-threshold");
     this.system.hasGoldThreshold = gct > 0;
     if (this.system.hasGoldThreshold > 0 && this.system.gold) {
-      this.system.goldSlots = Math.floor(this.system.gold / gct);
+      this.system.goldSlots = this._calcGoldSlots();
     }
 
     if (this.system.encumbered) {
@@ -75,7 +75,19 @@ export class CairnActor extends Actor {
       this.system.hp.value = 0;
     }
 
-    this.system.characterEquipmentLimit = game.settings.get("cairn", "character-inventory-limit");    
+    this.system.characterEquipmentLimit = game.settings.get("cairn", "character-inventory-limit");
+  }
+
+  _calcGoldSlots() {
+    const gct = game.settings.get("cairn", "use-gold-threshold");
+    if (gct > 0 && this.system.gold) {
+      if (this.type === "container") {
+        return Math.ceil(this.system.gold / gct);
+      } else {
+        return Math.floor(this.system.gold / gct);
+      }
+    }
+    return 0;
   }
 
   _prepareNpcData() {
@@ -91,6 +103,7 @@ export class CairnActor extends Actor {
     this.system.slotsMax = this.calcCurrentMaxSlots();
     this.system.encumbered =
       this.system.slotsUsed >= this.calcCurrentMaxSlots();
+    this.system.maybeTooMuchGold = false;
     if (this.system.keeper && this.system.keeper != "") {
       const actor = game.actors.find((a) => a.uuid == this.system.keeper);
       if (actor) {
@@ -98,6 +111,16 @@ export class CairnActor extends Actor {
           game.i18n.localize("CAIRN.Owner") + ": " + actor.name;
       }
     }
+
+    const gct = game.settings.get("cairn", "use-gold-threshold");
+    this.system.hasGoldThreshold = gct > 0;
+    this.system.goldSlots = this._calcGoldSlots();
+    if (this.system.encumbered) {
+      if (this.system.hasGoldThreshold && this.system.goldSlots > 0) {
+        this.system.maybeTooMuchGold = true;
+      }
+    }
+    this.system.showGoldNotCost = game.settings.get("cairn", "show-gold-not-cost");
   }
 
   /** @override */
@@ -237,7 +260,7 @@ export class CairnActor extends Actor {
     );
     const goldThreshold = game.settings.get("cairn", "use-gold-threshold");
     if (goldThreshold > 0 && this.system.gold) {
-      totalSlots += Math.floor(this.system.gold / goldThreshold);
+      totalSlots += this._calcGoldSlots();
     }
     return totalSlots;
   }
