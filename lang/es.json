@@ -76,6 +76,11 @@
       "hint": "Define el límite del número de piezas de oro que pueden ocupar el espacio del inventario. Cero significa que las piezas de oro son siempre insignificantes.",
       "message": "El oro cuenta como inventario"
     },
+    "ShowGoldNotCost": {
+      "label": "Mostrar el oro en lugar del coste en los contenedores",
+      "hint": "Esto permite colocar oro (incluyendo el control de su peso) dentro de los contenedores.",
+      "message": "El peso del oro se redondea al alza en lugar de a la baja cuando se registra en contenedores."
+    },
     "UsePanic": {
       "label": "Usar la condición de Pánico",
       "hint": "Utiliza la condición de Pánico de 2e para los personajes jugadores."
@@ -99,6 +104,10 @@
    "ShowContainerActors": {
       "label":"Mostrar actores contenedores",
       "hint": "Muestra los contenedores en la lista de actores"
+   },
+    "CharacterInventoryLimit": {
+      "label":"Límite de equipo del personaje",
+      "hint": "El límite de equipo se define por personaje, en lugar de ser un valor global."
    }
   },
   "CAIRN.Slots": "Espacios",
