@@ -1,10 +1,20 @@
-# Cairn for FoundryVTT!
+# Cairn Compatible
 
-> **This is `cairn-compatible`, a community fork of the original
+**Cairn Compatible** is a fork of the Cairn system for Foundry Virtual Tabletop, focused on
+keeping compatibility with Foundry VTT v13 and providing a complete Brazilian Portuguese
+localization. Beyond translating the interface, the project ships ready-to-use compendiums based
+on *Cairn: Edição Básica* (Barebones Edition) and the official More Spellbooks and More Relics
+content, with automatic character generation and rules adapted for both languages.
+
+**Cairn Compatible** é um fork do sistema Cairn para Foundry Virtual Tabletop, focado em manter
+compatibilidade com o Foundry VTT v13 e oferecer uma localização completa em português do Brasil.
+Além da tradução da interface, o projeto traz compêndios prontos baseados no *Cairn: Edição
+Básica* e no conteúdo oficial de Mais Feitiços e Mais Relíquias, com geração automática de
+personagens e regras adaptadas para os dois idiomas.
+
+> This is a community fork of the original
 > [Cairn-FoundryVTT](https://github.com/yochaigal/Cairn-FoundryVTT) by
-> [Yochai Gal](https://newschoolrevolution.com), focused on Foundry VTT v13 compatibility, a
-> complete Brazilian Portuguese localization, and compendium content from *Cairn: Edição Básica*
-> and the official [cairnrpg.com](https://cairnrpg.com) resource pages. See
+> [Yochai Gal](https://newschoolrevolution.com). See
 > [`CHANGELOG-en.md`](CHANGELOG-en.md) / [`CHANGELOG-ptbr.md`](CHANGELOG-ptbr.md) for exactly
 > what changed and why. All original code remains MIT-licensed (see `LICENSE.txt`); Cairn text
 > content is CC BY-SA 4.0.
