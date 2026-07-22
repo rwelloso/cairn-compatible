@@ -47,39 +47,55 @@ Implements basic character and item sheets for playing [Cairn](https://cairnrpg.
 
 The code is based on the [Electric Bastionland system](https://github.com/mvdleden/electric-bastionland-FoundryVTT/) for FoundryVTT (which in turn is based on the Into the Odd System).
 
-## Installation - This Fork (Manual)
+## Instalação
 
-1. Download the latest release zip from this repository's [Releases](../../releases) page (or
-   clone this repo directly into your `Data/systems/` folder).
-2. Make sure the folder is named exactly `cairn` inside `Data/systems/`.
-3. Restart Foundry VTT and the system will appear as "Cairn (compatible fork)" — or whatever
-   version string is in `system.json` at the time.
-4. Import the **"Cairn - Edição Básica (PT-BR)"** compendium folder into your world if you want
-   the Portuguese content.
+Repositório: <https://github.com/rwelloso/cairn-compatible>
 
-## Installation - Auto Installer (Recommended, upstream)
+### Opção A — via manifesto (recomendada)
 
-1. In the FVTT Game Systems Menu, click `Install System`
-2. Search for "Cairn" in the package search filter.
-3. Allow players to "Create new Actors" in the "Configure Settings" permissions menu
+1. No Foundry, vá em **Configurar Sistemas de Jogo** → **Instalar Sistema**.
+2. Cole no campo de manifesto:
 
-## Installation - Manual - Foundry V12+
+```
+https://github.com/rwelloso/cairn-compatible/releases/latest/download/system.json
+```
 
-1. In the FVTT Game Systems Menu, click `Install System`
-2. Enter the Manifest URL: `https://github.com/yochaigal/Cairn-FoundryVTT/releases/latest/download/system.json`
-3. Allow players to "Create new Actors" in the "Configure Settings" permissions menu
-4. 
-## Installation - Manual - Foundry V10+
+3. Clique em **Instalar**.
+4. Permita que os jogadores "criem novos Atores" no menu de permissões em **Configurar Definições**, se necessário.
+5. Depois de criar um mundo com o sistema, importe a pasta de compêndio **"Cairn - Edição Básica (PT-BR)"** se quiser o conteúdo em português.
 
-1. In the FVTT Game Systems Menu, click `Install System`
-2. Enter the Manifest URL: `https://github.com/yochaigal/Cairn-FoundryVTT/releases/download/0.10.31/system.json`
-3. Allow players to "Create new Actors" in the "Configure Settings" permissions menu
+Atualizações futuras aparecem automaticamente na lista de sistemas, como qualquer outro sistema instalado dessa forma.
 
-## Installation - Manual - Foundry V9
+### Opção B — copiando a pasta manualmente
 
-1. In the FVTT Game Systems Menu, click `Install System`
-2. Enter the Manifest URL: `https://github.com/yochaigal/Cairn-FoundryVTT/releases/download/0.10.25/system.json`
-3. Allow players to "Create new Actors" in the "Configure Settings" permissions menu
+1. Baixe o `.zip` da [última release](https://github.com/rwelloso/cairn-compatible/releases/latest) (ou clone este repositório diretamente).
+2. Extraia/copie o conteúdo para `[sua pasta de dados do Foundry]/Data/systems/cairn/` — a pasta precisa se chamar exatamente `cairn`.
+3. Reinicie o Foundry (ou atualize a lista de sistemas).
+
+## Installation
+
+Repository: <https://github.com/rwelloso/cairn-compatible>
+
+### Option A — via manifest (recommended)
+
+1. In Foundry, go to **Game Systems** → **Install System**.
+2. Paste in the manifest field:
+
+```
+https://github.com/rwelloso/cairn-compatible/releases/latest/download/system.json
+```
+
+3. Click **Install**.
+4. Allow players to "Create new Actors" in the **Configure Settings** permissions menu, if needed.
+5. After creating a world with the system, import the **"Cairn - Edição Básica (PT-BR)"** compendium folder if you want the Portuguese content.
+
+Future updates show up automatically in the systems list, like any other system installed this way.
+
+### Option B — copying the folder manually
+
+1. Download the `.zip` from the [latest release](https://github.com/rwelloso/cairn-compatible/releases/latest) (or clone this repository directly).
+2. Extract/copy the contents to `[your Foundry data folder]/Data/systems/cairn/` — the folder must be named exactly `cairn`.
+3. Restart Foundry (or refresh the systems list).
 
 ## Contributing
 
