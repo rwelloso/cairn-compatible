@@ -1,23 +1,47 @@
 # Cairn Compatible
 
-**Cairn Compatible** is a fork of the Cairn system for Foundry Virtual Tabletop, focused on
-keeping compatibility with Foundry VTT v13 and providing a complete Brazilian Portuguese
-localization. Beyond translating the interface, the project ships ready-to-use compendiums based
-on *Cairn: Edição Básica* (Barebones Edition) and the official More Spellbooks and More Relics
-content, with automatic character generation and rules adapted for both languages.
+<p align="center">
+  <img src="media/cairn-compatible-logo.jpg" alt="Cairn Compatible" width="360">
+</p>
 
-**Cairn Compatible** é um fork do sistema Cairn para Foundry Virtual Tabletop, focado em manter
-compatibilidade com o Foundry VTT v13 e oferecer uma localização completa em português do Brasil.
-Além da tradução da interface, o projeto traz compêndios prontos baseados no *Cairn: Edição
-Básica* e no conteúdo oficial de Mais Feitiços e Mais Relíquias, com geração automática de
-personagens e regras adaptadas para os dois idiomas.
+**Cairn Compatible** is now available in Portuguese (Brazil) and English. The project's proposal
+goes beyond translation: to build more compatibility between the different games that carry the
+Cairn Compatible seal, so they all work well together on Foundry VTT.
+
+**Cairn Compatible** já está disponível em português do Brasil e em inglês. A proposta do projeto
+vai além da tradução: criar mais compatibilidade entre os diferentes jogos que usam o selo Cairn
+Compatible, para que todos funcionem bem juntos no Foundry VTT.
+
+## What's new
+
+- Foundry VTT v13 compatibility
+- Full Brazilian Portuguese localization (`en.json`/`pt-BR.json` parity)
+- Toggleable automatic Scars roll (Configure Settings → Cairn)
+- Coins system (Copper/Silver/Gold/Other) replacing the old Gold field
+- Advantage/Normal/Disadvantage prompt for ability tests
+- Impaired/Normal/Enhanced prompt for weapon damage
+- "Cairn - Edição Básica (PT-BR)" compendium: items, tables, and reference journal
+- More Spellbooks and More Relics content, translated with source attribution
+- Alphabetized Spell Index (A-Z), in Portuguese and English
+
+## O que há de novo
+
+- Compatibilidade com o Foundry VTT v13
+- Localização completa em português do Brasil (paridade entre `en.json`/`pt-BR.json`)
+- Rolagem automática de Cicatrizes com opção de ligar/desligar (Configurar Definições → Cairn)
+- Sistema de Moedas (Cobre/Prata/Ouro/Outro) no lugar do antigo campo de Ouro
+- Vantagem/Normal/Desvantagem nos testes de atributo
+- Prejudicado/Normal/Aprimorado no dano de arma
+- Compêndio "Cairn - Edição Básica (PT-BR)": itens, tabelas e diário de referência
+- Conteúdo de Mais Livros de Feitiço e Mais Relíquias, traduzido com atribuição de fonte
+- Índice de Feitiços (A-Z), em português e inglês
+
+See [`CHANGELOG-en.md`](CHANGELOG-en.md) / [`CHANGELOG-ptbr.md`](CHANGELOG-ptbr.md) for full details.
 
 > This is a community fork of the original
 > [Cairn-FoundryVTT](https://github.com/yochaigal/Cairn-FoundryVTT) by
-> [Yochai Gal](https://newschoolrevolution.com). See
-> [`CHANGELOG-en.md`](CHANGELOG-en.md) / [`CHANGELOG-ptbr.md`](CHANGELOG-ptbr.md) for exactly
-> what changed and why. All original code remains MIT-licensed (see `LICENSE.txt`); Cairn text
-> content is CC BY-SA 4.0.
+> [Yochai Gal](https://newschoolrevolution.com). All original code remains MIT-licensed (see
+> `LICENSE.txt`); Cairn text content is CC BY-SA 4.0.
 
 Implements basic character and item sheets for playing [Cairn](https://cairnrpg.com) by [Yochai Gal](https://newschoolrevolution.com) in Foundry VTT. Cairn is a mashup of Knave and Into The Odd, meant for Wood Fantasy settings such as Necrotic Gnome's [Dolmenwood](https://necroticgnome.com/collections/dolmenwood).
 

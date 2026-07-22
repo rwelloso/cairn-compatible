@@ -1,7 +1,7 @@
 {
   "id": "cairn",
   "title": "Cairn",
-  "description": "Cairn for FoundryVTT",
+  "description": "Cairn for Foundry VTT — pt-BR & English, with ongoing improvements and a focus on compatibility across Cairn Compatible games and modules.",
   "version": "0.26-ptbr.1",
   "compatibility": {
     "minimum": "13",
