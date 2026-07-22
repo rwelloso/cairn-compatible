@@ -39,6 +39,8 @@
   "CAIRN.Features": "Features",
   "CAIRN.FeaturesInfo": "Additional character traits with some mechanical effect.",
   "CAIRN.Gold": "Gold",
+  "CAIRN.Coins": "Coins",
+  "CAIRN.Currency": "Currency",
   "CAIRN.HitProtection": "HP",
   "CAIRN.Item": "Item",
   "CAIRN.Items": "Items",
@@ -64,8 +66,13 @@
   "CAIRN.RollingDmgWith": "Rolling damage with",
   "CAIRN.RollingWithPanic": "Panic",
   "CAIRN.Role": "Role",
+  "CAIRN.ChooseRollMode": "Choose roll mode",
+  "CAIRN.Advantage": "Advantage",
+  "CAIRN.Disadvantage": "Disadvantage",
+  "CAIRN.Normal": "Normal",
+  "CAIRN.Impaired": "Impaired",
+  "CAIRN.Enhanced": "Enhanced",
   "CAIRN.Save": "{key} save",
-  "CAIRN.Scars": "Got a scar",
   "CAIRN.Settings": {
     "MaxEquipSlots": {
       "label": "Equipment Limit",
@@ -84,6 +91,10 @@
     "UsePanic": {
       "label": "Use panic condition",
       "hint": "Use 2e panic condition for player characters."
+    },
+    "AutoRollScars": {
+      "label": "Automatically roll for scars",
+      "hint": "Automatically roll on the Scars table whenever a character's Hit Protection is reduced to 0. Turn off to disable the automatic roll entirely (you can still roll on the Scars table yourself from the compendium)."
     },
     "UseItemIcons": {
       "label": "Show item icons",

@@ -1,5 +1,6 @@
 import { regenerateActor } from "../character-generator.js";
 import { evaluateFormula, getInfoFromDropData, stripPar } from "../utils.js";
+import { Damage } from "../damage.js";
 
 /**
  * Extend the basic ActorSheet with some very simple modifications
@@ -415,52 +416,9 @@ export class CairnActorSheet extends ActorSheet {
    */
   async _onRoll(event) {
     event.preventDefault();
-    const element = event.currentTarget;
-    const dataset = element.dataset;
-    if (dataset.roll) {
-      const usePanic = game.settings.get("cairn", "use-panic");
-      let panicLabel = "";
-      if (usePanic && this.actor.system.panicked) {
-        dataset.roll = "1d4"; // panicked character
-        panicLabel = "(" + game.i18n.localize("CAIRN.RollingWithPanic") + ")";
-      }
-
-      const roll = await evaluateFormula(
-        dataset.roll,
-        this.actor.getRollData()
-      );
-      const label = dataset.label
-        ? game.i18n.localize("CAIRN.RollingDmgWith") +
-          ` ${dataset.label} ` +
-          panicLabel
-        : "";
-
-      const targetedTokens = Array.from(game.user.targets).map((t) => t.id);
-
-      let targetIds;
-      if (targetedTokens.length == 0) targetIds = null;
-      else if (targetedTokens.length == 1) targetIds = targetedTokens[0];
-      else {
-        targetIds = targetedTokens[0];
-        for (let index = 1; index < targetedTokens.length; index++) {
-          const element = targetedTokens[index];
-          targetIds = targetIds.concat(";", element);
-        }
-      }
-
-      this._buildDamageRollMessage(label, targetIds).then((msg) => {
-        roll.toMessage({
-          speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-          flavor: msg,
-        });
-      });
-    }
-  }
-
-  _buildDamageRollMessage(label, targetIds) {
-    const rollMessageTpl = "systems/cairn/templates/chat/dmg-roll-card.html";
-    const tplData = { label: label, targets: targetIds };
-    return renderTemplate(rollMessageTpl, tplData);
+    const dataset = event.currentTarget.dataset;
+    if (!dataset.roll) return;
+    await Damage.rollWeaponDamage(this.actor, dataset.label, dataset.roll);
   }
 
   _onItemDescriptionToggle(event) {
@@ -535,26 +493,48 @@ export class CairnActorSheet extends ActorSheet {
     event.preventDefault();
     const element = event.currentTarget;
     const dataset = element.dataset;
-    if (dataset.roll) {
-      const roll = await evaluateFormula(
-        dataset.roll,
-        this.actor.getRollData()
-      );
-      const label = dataset.label
-        ? game.i18n.localize("CAIRN.Rolling") + ` ${dataset.label}`
-        : "";
-      const rolled = roll.terms[0].results[0].result;
-      const result =
-        roll.total === 0
-          ? game.i18n.localize("CAIRN.Fail")
-          : game.i18n.localize("CAIRN.Success");
-      const resultCls = roll.total === 0 ? "failure" : "success";
-      roll.toMessage({
-        speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-        flavor: label,
-        content: `<div class="dice-roll"><div class="dice-result"><div class="dice-formula">${roll.formula}</div><div class="dice-tooltip" style="display: none;"><section class="tooltip-part"><div class="dice"><header class="part-header flexrow"><span class="part-formula">${roll.formula}</span></header><ol class="dice-rolls"><li class="roll die d20">${rolled}</li></ol></div></section></div><h4 class="dice-total ${resultCls}">${result} (${rolled})</h4</div></div>`,
+    if (!dataset.roll) return;
+
+    let choice;
+    try {
+      choice = await foundry.applications.api.DialogV2.wait({
+        window: { title: dataset.label || game.i18n.localize("CAIRN.ChooseRollMode") },
+        content: `<p>${game.i18n.localize("CAIRN.ChooseRollMode")}</p>`,
+        buttons: [
+          { action: "advantage", label: game.i18n.localize("CAIRN.Advantage") },
+          { action: "normal", label: game.i18n.localize("CAIRN.Normal"), default: true },
+          { action: "disadvantage", label: game.i18n.localize("CAIRN.Disadvantage") },
+        ],
+        rejectClose: false,
       });
+    } catch {
+      return;
     }
+    if (!choice) return;
+
+    const diceFormula =
+      choice === "advantage" ? "2d20kl" : choice === "disadvantage" ? "2d20kh" : "1d20";
+
+    const roll = await evaluateFormula(diceFormula, this.actor.getRollData());
+    const rolled = roll.total;
+    const abilityKey = dataset.key;
+    const abilityValue = this.actor.getRollData()[abilityKey];
+    const success = rolled <= abilityValue;
+
+    const modeLabel =
+      choice === "normal" ? "" : ` (${game.i18n.localize(`CAIRN.${choice === "advantage" ? "Advantage" : "Disadvantage"}`)})`;
+    const label = dataset.label
+      ? game.i18n.localize("CAIRN.Rolling") + ` ${dataset.label}${modeLabel}`
+      : "";
+    const result = success
+      ? game.i18n.localize("CAIRN.Success")
+      : game.i18n.localize("CAIRN.Fail");
+    const resultCls = success ? "success" : "failure";
+    roll.toMessage({
+      speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+      flavor: label,
+      content: `<div class="dice-roll"><div class="dice-result"><div class="dice-formula">${roll.formula}</div><div class="dice-tooltip" style="display: none;"><section class="tooltip-part"><div class="dice"><header class="part-header flexrow"><span class="part-formula">${roll.formula}</span></header><ol class="dice-rolls"><li class="roll die d20">${rolled}</li></ol></div></section></div><h4 class="dice-total ${resultCls}">${result} (${rolled})</h4</div></div>`,
+    });
   }
 
   /**

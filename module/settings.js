@@ -39,6 +39,16 @@ export const registerSettings = () => {
     requiresReload: true,
   });
 
+  game.settings.register("cairn", "auto-roll-scars", {
+    name: game.i18n.localize("CAIRN.Settings.AutoRollScars.label"),
+    hint: game.i18n.localize("CAIRN.Settings.AutoRollScars.hint"),
+    scope: "world",
+    config: true,
+    type: Boolean,
+    default: true,
+    requiresReload: false,
+  });
+
   game.settings.register("cairn", "use-item-icons", {
     name: game.i18n.localize("CAIRN.Settings.UseItemIcons.label"),
     hint: game.i18n.localize("CAIRN.Settings.UseItemIcons.hint"),

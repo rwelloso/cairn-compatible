@@ -33,7 +33,15 @@ export class CairnActor extends Actor {
     this.system.showFeatures = game.settings.get("cairn", "show-features-section");
     this.system.showBio = (this.system.biography !== undefined && this.system.biography !== null);
     this.system.showDesc = (this.system.description !== undefined && this.system.description !== null);
-    
+
+    // Coins (system.currency items, e.g. Copper/Silver/Gold/Other Coins) are
+    // weightless items in the inventory. Their total quantity replaces the
+    // old free-form "gold" number and drives the optional gold-weight-threshold
+    // rule, exactly as the manually-entered gold value used to.
+    if (["character", "npc", "container"].includes(this.type)) {
+      this.system.gold = this.calcCoins();
+    }
+
     if (this.type === "character") this._prepareCharacterData();
     if (this.type === "npc") this._prepareNpcData();
     if (this.type === "container") this._prepareContainerData();
@@ -263,6 +271,19 @@ export class CairnActor extends Actor {
       totalSlots += this._calcGoldSlots();
     }
     return totalSlots;
+  }
+
+  /**
+   * @description Sum the quantity of all owned items flagged as currency
+   * (system.currency === true), e.g. Copper/Silver/Gold/Other Coins. This
+   * total is what "Moedas"/"Coins" on the sheet displays, and what the
+   * optional gold-weight-threshold rule is measured against.
+   * @returns {Number}
+   */
+  calcCoins() {
+    return this.items
+      .filter((item) => item.system.currency ?? false)
+      .reduce((sum, item) => sum + (parseInt(item.system.quantity, 10) || 0), 0);
   }
 
   calcArmor() {

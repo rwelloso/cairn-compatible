@@ -34,6 +34,15 @@
                         value="{{data.system.weightless}}" data-dtype="Boolean" />
             </div>
         </div>
+
+        <!-- Currency -->
+        <div class="resource-counter long-counter">
+            <label class="large-resource-label" for="system.currency">{{ localize 'CAIRN.Currency' }}</label>
+            <div class="resource-input-wrapper">
+                <input type="checkbox" {{checked data.system.currency}} name="system.currency" id="system.currency"
+                        value="{{data.system.currency}}" data-dtype="Boolean" />
+            </div>
+        </div>
       
         <!-- Quantity -->
         <div class="resource-counter long-counter">

@@ -57,7 +57,10 @@
       "description": "",
       "slots": 0,
       "keeper": "",
-      "cost": 0
+      "cost": {
+        "value": 0
+      },
+      "gold": 0
     }
   },
   "Item": {
@@ -74,8 +77,11 @@
         "weightless": false,
         "equipped": false,
         "bulky": false,
-        "cost": 0,
-        "quantity": 1
+        "cost": {
+          "value": 0
+        },
+        "quantity": 1,
+        "currency": false
       },
       "withDamage": {
         "damageFormula": "",

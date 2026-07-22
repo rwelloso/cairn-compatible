@@ -96,6 +96,25 @@ export const rollHitProtection = async (formula) => (await evaluateFormula(formu
 export const rollGold = async (formula) => (await evaluateFormula(formula)).total;
 
 /**
+ * @description Roll starting gold and turn it into a quantity of a coin item
+ * (e.g. "cairn.extra;Gold Coins"), instead of a bare number, since gold is
+ * now tracked as regular (weightless) inventory items.
+ * @param {String} formula dice formula for the amount, e.g. "3d6"
+ * @param {String} compendiumItem "compendium;itemName" reference to a coin item
+ * @returns {Promise.<CairnItem|undefined>}
+ */
+export const rollGoldItem = async (formula, compendiumItem) => {
+  const amount = await rollGold(formula);
+  if (!compendiumItem) return undefined;
+  const [compendium, name] = compendiumInfoFromString(compendiumItem);
+  const item = await findCompendiumItem(compendium, name);
+  if (!item) return undefined;
+  const data = foundry.utils.duplicate(item);
+  data.system.quantity = amount;
+  return data;
+};
+
+/**
  * @param {String} formula
  * @returns {Promise.<String>}
  */
@@ -152,24 +171,26 @@ export const findStartingItems = async (items) => {
 export const generateCharacter = async () => {
   console.log(`Creating new character`);
 
-  const characterGenerator = Cairn.characterGenerator;
+  const isPortuguese = (game.i18n.lang || "").toLowerCase().startsWith("pt");
+  const characterGenerator = isPortuguese && Cairn.characterGeneratorPtBr
+    ? Cairn.characterGeneratorPtBr
+    : Cairn.characterGenerator;
 
   const abilities = await rollAbilities(characterGenerator.ability);
   const hp = await rollHitProtection(characterGenerator.hitProtection);
-  const gold = await rollGold(characterGenerator.gold);
   const name = await rollName(characterGenerator.name);
   const biography = await rollBiography(characterGenerator.biography);
   const background = await rollBackground(characterGenerator.background)
   const startingItems = await findStartingItems(characterGenerator.startingItems);
   const startingGear = await rollStartingGear(characterGenerator.startingGear);
+  const goldItem = await rollGoldItem(characterGenerator.gold, characterGenerator.goldItem);
 
   return {
     name,
     hp,
-    gold,
     abilities,
     background,
-    items: [...startingItems, ...startingGear],
+    items: [...startingItems, ...startingGear, ...(goldItem ? [goldItem] : [])],
     biography,
   };
 };
@@ -192,7 +213,6 @@ const characterToActorData = (characterData) => ({
     },
     background: characterData.background,
     biography: characterData.biography,
-    gold: characterData.gold,
   },
   items: characterData.items,
   token: {

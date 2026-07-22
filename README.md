@@ -1,10 +1,29 @@
 # Cairn for FoundryVTT!
 
+> **This is `cairn-compatible`, a community fork of the original
+> [Cairn-FoundryVTT](https://github.com/yochaigal/Cairn-FoundryVTT) by
+> [Yochai Gal](https://newschoolrevolution.com), focused on Foundry VTT v13 compatibility, a
+> complete Brazilian Portuguese localization, and compendium content from *Cairn: Edição Básica*
+> and the official [cairnrpg.com](https://cairnrpg.com) resource pages. See
+> [`CHANGELOG-en.md`](CHANGELOG-en.md) / [`CHANGELOG-ptbr.md`](CHANGELOG-ptbr.md) for exactly
+> what changed and why. All original code remains MIT-licensed (see `LICENSE.txt`); Cairn text
+> content is CC BY-SA 4.0.
+
 Implements basic character and item sheets for playing [Cairn](https://cairnrpg.com) by [Yochai Gal](https://newschoolrevolution.com) in Foundry VTT. Cairn is a mashup of Knave and Into The Odd, meant for Wood Fantasy settings such as Necrotic Gnome's [Dolmenwood](https://necroticgnome.com/collections/dolmenwood).
 
 The code is based on the [Electric Bastionland system](https://github.com/mvdleden/electric-bastionland-FoundryVTT/) for FoundryVTT (which in turn is based on the Into the Odd System).
 
-## Installation - Auto Installer (Recommended)
+## Installation - This Fork (Manual)
+
+1. Download the latest release zip from this repository's [Releases](../../releases) page (or
+   clone this repo directly into your `Data/systems/` folder).
+2. Make sure the folder is named exactly `cairn` inside `Data/systems/`.
+3. Restart Foundry VTT and the system will appear as "Cairn (compatible fork)" — or whatever
+   version string is in `system.json` at the time.
+4. Import the **"Cairn - Edição Básica (PT-BR)"** compendium folder into your world if you want
+   the Portuguese content.
+
+## Installation - Auto Installer (Recommended, upstream)
 
 1. In the FVTT Game Systems Menu, click `Install System`
 2. Search for "Cairn" in the package search filter.

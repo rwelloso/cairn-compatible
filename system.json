@@ -2,7 +2,7 @@
   "id": "cairn",
   "title": "Cairn",
   "description": "Cairn for FoundryVTT",
-  "version": "0.23",
+  "version": "0.26-ptbr.1",
   "compatibility": {
     "minimum": "13",
     "verified": "13.346"
@@ -118,6 +118,41 @@
       "path": "packs/weapons.db",
       "type": "Item",
       "system": "cairn"
+    },
+    {
+      "name": "ptbr-itens",
+      "label": "PT-BR: Itens (Edição Básica)",
+      "path": "packs/ptbr-itens.db",
+      "type": "Item",
+      "system": "cairn"
+    },
+    {
+      "name": "ptbr-tabelas",
+      "label": "PT-BR: Tabelas (Edição Básica)",
+      "path": "packs/ptbr-tabelas.db",
+      "type": "RollTable",
+      "system": "cairn"
+    },
+    {
+      "name": "ptbr-referencia",
+      "label": "PT-BR: Referência (Edição Básica)",
+      "path": "packs/ptbr-referencia.db",
+      "type": "JournalEntry",
+      "system": "cairn"
+    },
+    {
+      "name": "ptbr-mais-feiticos",
+      "label": "PT-BR: Mais Livros de Feitiço",
+      "path": "packs/ptbr-mais-feiticos.db",
+      "type": "Item",
+      "system": "cairn"
+    },
+    {
+      "name": "ptbr-mais-reliquias",
+      "label": "PT-BR: Mais Relíquias",
+      "path": "packs/ptbr-mais-reliquias.db",
+      "type": "Item",
+      "system": "cairn"
     }
   ],
   "packFolders": [
@@ -150,6 +185,17 @@
         "character-creation-tables-srd",
         "gear-tables",
         "utils"
+      ]
+    },
+    {
+      "name": "Cairn - Edição Básica (PT-BR)",
+      "sorting": "a",
+      "packs": [
+        "ptbr-itens",
+        "ptbr-tabelas",
+        "ptbr-referencia",
+        "ptbr-mais-feiticos",
+        "ptbr-mais-reliquias"
       ]
     }
   ],

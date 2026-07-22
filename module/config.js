@@ -5,6 +5,7 @@ Cairn.characterGenerator = {
   ability: "3d6",
   hitProtection: "1d6",
   gold: "3d6",
+  goldItem: "cairn.extra;Gold Coins",
   name: {
     text: "{name} {surname}",
     items: {
@@ -45,4 +46,49 @@ Cairn.characterGenerator = {
 };
 
 CONFIG.Cairn = Cairn;
+
+/**
+ * Cairn: Edição Básica (pt-BR) character generator, driven by the
+ * Portuguese-language compendiums (packs/ptbr-itens, packs/ptbr-tabelas).
+ * Used automatically instead of Cairn.characterGenerator when the active
+ * Foundry language is Portuguese; see generateCharacter() in
+ * character-generator.js.
+ */
+Cairn.characterGeneratorPtBr = {
+  ability: "3d6",
+  hitProtection: "1d6",
+  gold: "3d6",
+  goldItem: "cairn.ptbr-itens;Moedas de Ouro",
+  name: {
+    text: "{nome} {sobrenome}",
+    items: {
+      nome: "cairn.ptbr-tabelas;Nomes Próprios",
+      sobrenome: "cairn.ptbr-tabelas;Sobrenomes"
+    }
+  },
+  background: "cairn.ptbr-tabelas;Antecedentes",
+  startingItems: [
+    "cairn.ptbr-itens;Rações;1",
+    "cairn.ptbr-itens;Tocha;1"
+  ],
+  startingGear: [
+    "cairn.ptbr-tabelas;Armas",
+    "cairn.ptbr-tabelas;Armadura",
+    "cairn.ptbr-tabelas;Equipamento Adicional"
+  ],
+  biography: {
+    text: "Você tem um físico <strong>{physique}</strong>, pele <strong>{skin}</strong>, cabelo <strong>{hair}</strong> e rosto <strong>{face}</strong>. Fala de modo <strong>{speech}</strong> e veste roupas <strong>{clothing}</strong>. É <strong>{vice}</strong>, porém <strong>{virtue}</strong>. Tem <strong>{age}</strong> anos de idade.",
+    age: "2d20 + 10",
+    items: {
+      physique: "cairn.ptbr-tabelas;Físico",
+      skin: "cairn.ptbr-tabelas;Pele",
+      hair: "cairn.ptbr-tabelas;Cabelo",
+      face: "cairn.ptbr-tabelas;Rosto",
+      speech: "cairn.ptbr-tabelas;Fala",
+      clothing: "cairn.ptbr-tabelas;Roupas",
+      vice: "cairn.ptbr-tabelas;Vício",
+      virtue: "cairn.ptbr-tabelas;Virtude"
+    }
+  }
+};
 
