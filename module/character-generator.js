@@ -52,12 +52,13 @@ export const updateActorWithCharacter = async (actor, characterData) => {
  * @return {Promise<Object>}
  */
 export const rollTextItems = async (items) => {
-  const data = {};
-  for (const [key, value] of Object.entries(items)) {
-    const [compendium, table] = compendiumInfoFromString(value)
-    data[key] = await drawTableText(compendium, table);
-  }
-  return data;
+  const entries = await Promise.all(
+    Object.entries(items).map(async ([key, value]) => {
+      const [compendium, table] = compendiumInfoFromString(value);
+      return [key, await drawTableText(compendium, table)];
+    })
+  );
+  return Object.fromEntries(entries);
 };
 
 /**
@@ -65,12 +66,13 @@ export const rollTextItems = async (items) => {
  @return {Promise<CairnItem[]>}
  */
 export const rollItems = async (items) => {
-  const result = [];
-  for (const value of Object.values(items)) {
-    const [compendium, table] = compendiumInfoFromString(value)
-    result.push(await drawTableItem(compendium, table));
-  }
-  return result.flatMap(item => foundry.utils.duplicate(item));
+  const results = await Promise.all(
+    Object.values(items).map(async (value) => {
+      const [compendium, table] = compendiumInfoFromString(value);
+      return drawTableItem(compendium, table);
+    })
+  );
+  return results.flatMap(item => foundry.utils.duplicate(item));
 };
 
 /**
@@ -151,19 +153,14 @@ export const rollStartingGear = async (items) => rollItems(items);
  * @param {Object} items
  * @return {Promise<CairnItem[]>}
  */
-export const findStartingItems = async (items) => {
-  const result = [];
-  for (const compendiumItem of items) {
+export const findStartingItems = async (items) => Promise.all(
+  items.map(async (compendiumItem) => {
     const [compendium, table, quantity = 1] = compendiumInfoFromString(compendiumItem);
-
     const item = foundry.utils.duplicate(await findCompendiumItem(compendium, table));
-
     item.system.quantity = parseInt(quantity, 10);
-
-    result.push(item);
-  }
-  return result;
-};
+    return item;
+  })
+);
 
 /**
  * @returns {Object}
@@ -176,14 +173,16 @@ export const generateCharacter = async () => {
     ? Cairn.characterGeneratorPtBr
     : Cairn.characterGenerator;
 
-  const abilities = await rollAbilities(characterGenerator.ability);
-  const hp = await rollHitProtection(characterGenerator.hitProtection);
-  const name = await rollName(characterGenerator.name);
-  const biography = await rollBiography(characterGenerator.biography);
-  const background = await rollBackground(characterGenerator.background)
-  const startingItems = await findStartingItems(characterGenerator.startingItems);
-  const startingGear = await rollStartingGear(characterGenerator.startingGear);
-  const goldItem = await rollGoldItem(characterGenerator.gold, characterGenerator.goldItem);
+  const [abilities, hp, name, biography, background, startingItems, startingGear, goldItem] = await Promise.all([
+    rollAbilities(characterGenerator.ability),
+    rollHitProtection(characterGenerator.hitProtection),
+    rollName(characterGenerator.name),
+    rollBiography(characterGenerator.biography),
+    rollBackground(characterGenerator.background),
+    findStartingItems(characterGenerator.startingItems),
+    rollStartingGear(characterGenerator.startingGear),
+    rollGoldItem(characterGenerator.gold, characterGenerator.goldItem),
+  ]);
 
   return {
     name,

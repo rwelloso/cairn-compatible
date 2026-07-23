@@ -13,12 +13,18 @@ export const compendiumInfoFromString = (compendiumString) => compendiumString.s
 export const findCompendiumItem = async (compendiumName, itemName) => {
   const compendium = game.packs.get(compendiumName);
   if (compendium) {
-    const documents = await compendium.getDocuments();
-    const item = documents.find((i) => i.name === itemName);
-    if (!item) {
+    // Use the lightweight index (name/type/id only, cached after first
+    // load) instead of getDocuments(), which fully instantiates every
+    // document in the pack on every single call. For a large pack (e.g.
+    // 800+ records) called repeatedly during character generation, that
+    // difference is the whole multi-second delay.
+    const index = await compendium.getIndex();
+    const entry = index.find((i) => i.name === itemName);
+    if (!entry) {
       console.warn(`findCompendiumItem: Could not find item (${itemName}) in compendium (${compendiumName})`);
+      return undefined;
     }
-    return item;
+    return compendium.getDocument(entry._id);
   }
   console.warn(`findCompendiumItem: Could not find compendium (${compendiumName})`);
 };
