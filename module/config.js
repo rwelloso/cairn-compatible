@@ -49,7 +49,8 @@ CONFIG.Cairn = Cairn;
 
 /**
  * Cairn: Edição Básica (pt-BR) character generator, driven by the
- * Portuguese-language compendiums (packs/ptbr-itens, packs/ptbr-tabelas).
+ * Portuguese-language compendiums (packs/ptbr-armas, packs/ptbr-armaduras,
+ * packs/ptbr-feiticos, packs/ptbr-equipamento, packs/ptbr-tabelas).
  * Used automatically instead of Cairn.characterGenerator when the active
  * Foundry language is Portuguese; see generateCharacter() in
  * character-generator.js.
@@ -58,7 +59,7 @@ Cairn.characterGeneratorPtBr = {
   ability: "3d6",
   hitProtection: "1d6",
   gold: "3d6",
-  goldItem: "cairn.ptbr-itens;Moedas de Ouro",
+  goldItem: "cairn.ptbr-equipamento;Moedas de Ouro",
   name: {
     text: "{nome} {sobrenome}",
     items: {
@@ -68,8 +69,8 @@ Cairn.characterGeneratorPtBr = {
   },
   background: "cairn.ptbr-tabelas;Antecedentes",
   startingItems: [
-    "cairn.ptbr-itens;Rações;1",
-    "cairn.ptbr-itens;Tocha;1"
+    "cairn.ptbr-equipamento;Rações;1",
+    "cairn.ptbr-equipamento;Tocha;1"
   ],
   startingGear: [
     "cairn.ptbr-tabelas;Armas",

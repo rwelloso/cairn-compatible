@@ -120,9 +120,30 @@
       "system": "cairn"
     },
     {
-      "name": "ptbr-itens",
-      "label": "PT-BR: Itens (Edição Básica)",
-      "path": "packs/ptbr-itens.db",
+      "name": "ptbr-armas",
+      "label": "PT-BR: Armas (Edição Básica)",
+      "path": "packs/ptbr-armas.db",
+      "type": "Item",
+      "system": "cairn"
+    },
+    {
+      "name": "ptbr-armaduras",
+      "label": "PT-BR: Armaduras (Edição Básica)",
+      "path": "packs/ptbr-armaduras.db",
+      "type": "Item",
+      "system": "cairn"
+    },
+    {
+      "name": "ptbr-feiticos",
+      "label": "PT-BR: Feitiços (Edição Básica)",
+      "path": "packs/ptbr-feiticos.db",
+      "type": "Item",
+      "system": "cairn"
+    },
+    {
+      "name": "ptbr-equipamento",
+      "label": "PT-BR: Equipamento (Edição Básica)",
+      "path": "packs/ptbr-equipamento.db",
       "type": "Item",
       "system": "cairn"
     },
@@ -191,7 +212,10 @@
       "name": "Cairn - Edição Básica (PT-BR)",
       "sorting": "a",
       "packs": [
-        "ptbr-itens",
+        "ptbr-armas",
+        "ptbr-armaduras",
+        "ptbr-feiticos",
+        "ptbr-equipamento",
         "ptbr-tabelas",
         "ptbr-referencia",
         "ptbr-mais-feiticos",

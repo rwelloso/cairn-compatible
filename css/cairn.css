@@ -444,6 +444,18 @@
     grid-row-end: 6;
 }
 
+/* Base "item" type has 11 fields (incl. Currency) needing 6 rows of 2
+   columns = 12 cells; the generic 5-row grid only offered 10, so Cost
+   (the 11th field) was silently overflowing past the fixed sheet height. */
+.item.item-sheet-grid {
+    grid-template-rows: 46px 36px 36px 36px 36px 36px 36px 1fr;
+}
+
+.item.item-sheet-grid .item-sheet-section-tabs {
+    grid-row-start: 8;
+    grid-row-end: 8;
+}
+
 
 .armor.item-sheet-grid,
 .object.item-sheet-grid {
